@@ -38,7 +38,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
         /*
          * Laravel dd() function.
          *
-         * Usage: @dd($variableToDump)
+         * Usage: @dd($variable)
          */
         Blade::directive('dd', function ($expression) {
             return "<?php dd(with({$expression})); ?>";
@@ -69,7 +69,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
         /*
          * php var_dump() function.
          *
-         * Usage: @vardump($variableToDump)
+         * Usage: @vardump($variable)
          */
         Blade::directive('vardump', function ($expression) {
             return "<?php var_dump({$expression}); ?>";
@@ -109,7 +109,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
         });
 
         /*
-         * Sets the class if the route contains the string.
+         * Sets the class unless the route contains the string.
          *
          * Usage: @activeUnlessRouteContains($path, 'class unless', 'class else')
          */
@@ -164,7 +164,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
         });
 
         /*
-         * Set a variable.
+         * Sets a variable.
          *
          * Usage: @set($name, value)
          */
@@ -185,7 +185,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
         });
 
         /*
-         * Truncate a variable.
+         * Truncates a variable.
          *
          * Usage: @truncate('Your String' , 4)
          */
@@ -198,8 +198,8 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
          * Sets the csrf token to the browser's window object.
          * The namespace is optional.
          *
-         * Usage: @csrf('Laracasts')
-         * Example: @csrf('namespace')
+         * Usage: @csrf($namespace)
+         * Example: @csrf('Laracasts')
          */
         Blade::directive('csrf', function ($expression) {
             list($namespace) = $this->getArguments($expression);
