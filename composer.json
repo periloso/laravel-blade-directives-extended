@@ -1,0 +1,20 @@
+{
+  "name": "periloso/laravel-blade-directives-extended",
+  "description": "Directive Extensions to Laravel Blade templating engine.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alessio Periloso",
+      "email": "mail@periloso.com"
+    }
+  ],
+  "require": {
+    "laravel/framework": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Periloso\\BladeDirectivesExtended\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
