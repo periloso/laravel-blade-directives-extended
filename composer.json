@@ -9,12 +9,21 @@
     }
   ],
   "require": {
-    "laravel/framework": "~5.0"
+    "laravel/framework": "~5.0",
+    "php": ">=5.4.0"
   },
   "autoload": {
     "psr-4": {
       "Periloso\\BladeDirectivesExtended\\": "src/"
     }
   },
-  "minimum-stability": "stable"
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Periloso\\BladeDirectivesExtended\\BladeDirectivesExtendedServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
