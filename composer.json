@@ -2,6 +2,7 @@
   "name": "periloso/laravel-blade-directives-extended",
   "description": "Directive Extensions to Laravel Blade templating engine.",
   "license": "MIT",
+  "keywords": ["laravel", "blade", "extended", "cache", "russian", "key-based"],
   "authors": [
     {
       "name": "Alessio Periloso",
@@ -9,13 +10,21 @@
     }
   ],
   "require": {
-    "laravel/framework": "~5.0",
-    "php": ">=5.4.0"
+    "laravel/framework": "^5.3",
+    "php": ">=7.0"
   },
   "autoload": {
     "psr-4": {
       "Periloso\\BladeDirectivesExtended\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "classmap": ["tests/TestCase.php"]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.2",
+    "illuminate/database": "^5.3",
+    "illuminate/cache": "^5.3"
   },
   "extra": {
     "laravel": {

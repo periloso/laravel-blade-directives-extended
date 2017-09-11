@@ -2,19 +2,47 @@
 
 namespace Periloso\BladeDirectivesExtended;
 
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
-use \Request;
-use \Blade;
+use Illuminate\Support\Facades\Blade;
+use Request;
 
 class BladeDirectivesExtendedServiceProvider extends ServiceProvider
 {
+    protected $request;
+    protected $blade;
+
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(Kernel $kernel)
     {
+        $this->cache = $this->app->make(\Illuminate\Contracts\Cache\Repository::class);
+        if ($this->app->isLocal()) {
+            $kernel->pushMiddleware('Periloso\BladeDirectivesExtended\FlushViews');
+        }
+
+        /**
+         * Start of a cached component.
+         */
+        Blade::directive('cache', function ($expression) {
+            $version = explode('.', $this->app::VERSION);
+            // Starting with laravel 5.3 the parens are not included in the expression string.
+            if ($version[1] > 2) {
+                return "<?php if (! app('Periloso\BladeDirectivesExtended\RussianBladeDirective')->setUp({$expression})) : ?>";
+            }
+            return "<?php if (! app('Periloso\BladeDirectivesExtended\RussianBladeDirective')->setUp{$expression}) : ?>";
+        });
+
+        /**
+         * End of a cached component.
+         */
+        Blade::directive('endcache', function () {
+            return "<?php endif; echo app('Laracasts\Matryoshka\BladeDirective')->tearDown() ?>";
+        });
+
         /*
          * Checks whether the array is empty.
          *
@@ -265,7 +293,7 @@ class BladeDirectivesExtendedServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(RussianBladeDirective::class);
     }
 
     /**
